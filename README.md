@@ -1,0 +1,2 @@
+# inventory
+stock maneger
