@@ -4,7 +4,9 @@ const app = express()
 require('dotenv').config()
 const bodyParser = require('body-parser')
 const userRoute = require("./routes/userRoute")
+const errorHandler = require('./middleware/errorMiddleware')
 const port = process.env.PORT || 5000
+
 connectDB()
 // !important! 
 // you need to install the following libraries |express|[dotenv > if required]
@@ -19,13 +21,17 @@ app.use(bodyParser.json())
 
 
 // Routes Middlware
-app.use("/api/users",userRoute)
-
 app.get('/' , (req , res)=>{
 
    res.send('hello from simple server :)')
 
 })
+app.use(errorHandler)
+
+
+app.use("/api/users",userRoute)
+
+
 
 
 app.listen(port , ()=> console.log('> Server is up and running on port : ' + port))
