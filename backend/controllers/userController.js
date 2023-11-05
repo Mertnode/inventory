@@ -11,10 +11,10 @@ exports.registerUser = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error("Please fill in all required fields")
     } 
-    if (password.lenght < 6) {
-        res.status(400)
-        throw new Error("Password must be up to 6 characters")
-    }s
+    if (password.length < 6) {
+        res.status(400);
+        throw new Error("Şifre en az 6 karakter olmalıdır");
+    }
 
     // Check if user email already exists
     const userExists = await User.findOne({email})
@@ -22,7 +22,7 @@ exports.registerUser = asyncHandler(async (req,res) => {
         res.status(400)
         throw new Error("Email has already been registered")
     }
-
+    
     //Create new user
     const user = await User.create({
         name,
@@ -32,7 +32,7 @@ exports.registerUser = asyncHandler(async (req,res) => {
     if (user) {
         const {_id,name,email,photo,phone,bio} = user
         res.status(201).json({
-           _id,name,email,photo,phone,bio
+           _id,password,name,email,photo,phone,bio
         })
     } else {
         res.status(400)
