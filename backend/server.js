@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const userRoute = require("./routes/userRoute")
 const errorHandler = require('./middleware/errorMiddleware')
 const port = process.env.PORT || 5000
-
+const cookieParser = require("cookie-parser")
 connectDB()
 // !important! 
 // you need to install the following libraries |express|[dotenv > if required]
@@ -16,6 +16,7 @@ connectDB()
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(cookieParser())
 app.use(bodyParser.json())
 
 
