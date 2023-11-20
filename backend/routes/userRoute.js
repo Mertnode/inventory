@@ -8,5 +8,5 @@ router.post("/login",loginUser)
 router.post("/logout",logoutUser)
 router.get("/getuser",protect,getUser)
 router.get("/loggeddin",loginStatus)
-router.patch("/updateuser",updateUser)
+router.patch("/updateuser",protect,updateUser)
 module.exports = router
