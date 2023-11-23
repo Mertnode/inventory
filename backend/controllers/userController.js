@@ -198,10 +198,14 @@ exports.updateUser = asyncHandler(async (req, res) => {
   });
 
   exports.changePassword = asyncHandler(async (req,res) => {
+    if (!user) {
+      res.status(400).json({error:"Please add old and new password"})
+    }
     const user  = await User.findById(req.user_id)
     //validate
     const {oldPassword,password} = req.body
     if(!oldPassword || password) (
       res.status(404).json({ error: "User not found" })
+
     )
   })
