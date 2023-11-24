@@ -199,13 +199,15 @@ exports.updateUser = asyncHandler(async (req, res) => {
 
   exports.changePassword = asyncHandler(async (req,res) => {
     if (!user) {
-      res.status(400).json({error:"Please add old and new password"})
+      res.status(400).json({error:"User not found, please signup"})
     }
     const user  = await User.findById(req.user_id)
     //validate
     const {oldPassword,password} = req.body
-    if(!oldPassword || password) (
+    if(!oldPassword || password) {
       res.status(404).json({ error: "User not found" })
+    }
+    //Check if old password matches password in DB
+    const passwordIsCorrect = await bcrypt.compare(oldPassword)
 
-    )
   })
