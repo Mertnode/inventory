@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const {mongo} = require("mongoose");
 
 
+
+// noinspection JSValidateTypes
 const productSchema = mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
