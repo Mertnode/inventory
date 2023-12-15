@@ -8,7 +8,11 @@ const productRoute = require("./routes/productRoute")
 const errorHandler = require('./middleware/errorMiddleware')
 const port = process.env.PORT || 5000
 const cookieParser = require("cookie-parser")
+const path = require('path');
+const { connectCloud } = require('./config/cloud')
+
 connectDB()
+connectCloud()
 // !important! 
 // you need to install the following libraries |express|[dotenv > if required]
 // or run this command >> npm i express dotenv 
@@ -20,7 +24,7 @@ app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(bodyParser.json())
 
-
+app.use("/uploads",express.static(path.join(__dirname, "uploads")))
 
 // Routes Middlware
 app.get('/' , (req , res)=>{
